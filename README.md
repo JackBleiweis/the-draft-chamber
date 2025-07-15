@@ -1,192 +1,300 @@
-# Fantasy Draft Lottery UI
+# The Draft Chamber
 
-A clean, modern React UI for a fantasy draft lottery application. This project provides a responsive card-based interface for displaying participants in a draft lottery system.
+A modern, interactive fantasy draft lottery application built with React and Firebase. Participants unlock their cards with unique passwords, complete engaging challenges, and reveal their draft positions in real-time.
 
-## Features
+## 🎯 Overview
 
-- **Responsive Design**: 2x5 grid layout that adapts to different screen sizes
-- **Modern UI**: Clean, card-based design with hover effects and animations
-- **Dark Mode Support**: Automatic dark mode based on user preferences
-- **Interactive Cards**: Cards can be flipped and have locked states
-- **SCSS Modules**: Modular, maintainable styling
-- **Accessibility**: Keyboard navigation and screen reader support
-- **TypeScript Ready**: Component structure ready for TypeScript migration
+The Draft Chamber transforms the traditional fantasy draft lottery into an interactive experience. Each participant receives a password-protected card that unlocks a series of skill-based challenges. Upon completing all challenges, they can "cast" their draft position to reveal where they'll pick in the fantasy draft.
 
-## Project Structure
+## ✨ Key Features
+
+### 🔒 **Password-Protected Cards**
+
+- Each participant has a unique password stored in Firebase
+- Cards remain locked until the correct password is entered
+- Real-time synchronization across all connected clients
+
+### 🎮 **Interactive Challenge System**
+
+- **Click Frenzy**: Click 34 times in 5 seconds - test your clicking speed
+- **Reaction Time**: Click when the card lights up (sub-250ms required)
+- **Memory Match**: Match 5 pairs of cards with only 3 strikes allowed
+- **Hold to Cast**: Final 90-second endurance challenge to reveal draft position
+
+### 🌐 **Real-time Synchronization**
+
+- Live updates of participant progress across all devices
+- Firebase Firestore integration for instant state changes
+- Collaborative viewing experience for draft events
+
+### 📱 **Mobile-Responsive Design**
+
+- Optimized for all screen sizes and devices
+- Touch-friendly controls and gestures
+- Progressive Web App (PWA) capabilities
+
+### 🎨 **Modern UI/UX**
+
+- Animated CSS creature (Rayquaza-inspired)
+- Smooth card flip animations and transitions
+- Dark mode support with automatic detection
+- Accessible design with keyboard navigation
+
+## 🛠 Technical Stack
+
+- **Frontend**: React 19.1.0 with functional components and hooks
+- **Backend**: Firebase Firestore for real-time data synchronization
+- **Styling**: SCSS modules with CSS custom properties
+- **Build Tool**: Create React App with modern React features
+- **Testing**: React Testing Library and Jest
+- **Math**: Math.js for challenge calculations
+
+## 📂 Project Structure
 
 ```
 src/
 ├── components/
-│   ├── App/
-│   │   ├── App.jsx
-│   │   └── App.module.scss
-│   ├── Card/
-│   │   ├── Card.jsx
-│   │   └── Card.module.scss
-│   ├── CardGrid/
-│   │   ├── CardGrid.jsx
-│   │   └── CardGrid.module.scss
-│   └── PasswordModal/
-│       ├── PasswordModal.jsx
-│       └── PasswordModal.module.scss
-├── App.js              # Main app wrapper
-├── index.js            # Entry point
-└── index.css           # Global styles
+│   ├── App/                    # Main application component
+│   ├── Card/                   # Individual participant cards
+│   ├── CardGrid/               # Responsive card layout
+│   ├── PasswordModal/          # Password entry interface
+│   ├── ChallengeModal/         # Challenge management system
+│   ├── ChallengeSelection/     # Challenge selection interface
+│   ├── ClickFrenzy/           # Speed clicking challenge
+│   ├── ReactionTime/          # Reaction timing challenge
+│   ├── MemoryMatch/           # Memory matching game
+│   ├── HoldToCast/            # Final endurance challenge
+│   └── RayquazaCreature/      # Animated CSS creature
+├── services/
+│   └── participantService.js   # Firebase integration layer
+├── firebase.js                 # Firebase configuration
+├── App.js                      # App wrapper component
+├── index.js                    # React entry point
+└── index.css                   # Global styles and CSS variables
 ```
 
-## Component Overview
-
-### Card Component
-
-- **Purpose**: Individual participant card with flip animation
-- **States**:
-  - `isLocked`: Prevents interaction and shows locked state
-  - `isFlipped`: Shows the back of the card
-- **Props**:
-  - `participant`: Object with `id`, `name`, `isLocked`, `isFlipped`
-  - `onClick`: Function called when card is clicked
-
-### CardGrid Component
-
-- **Purpose**: Responsive grid layout for organizing cards
-- **Layout**: 2x5 grid (desktop) → 4x3 (tablet) → 3x4 (mobile) → 2x5 (small mobile)
-- **Props**:
-  - `participants`: Array of participant objects
-  - `onCardClick`: Function called when any card is clicked
-
-### PasswordModal Component
-
-- **Purpose**: Modal for password entry (UI only)
-- **Features**: Form validation, accessibility, responsive design
-- **Props**:
-  - `isOpen`: Boolean to control modal visibility
-  - `onClose`: Function called when modal is closed
-  - `onSubmit`: Function called when form is submitted
-
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
 - Node.js (v14 or higher)
-- npm or yarn
+- npm or yarn package manager
+- Firebase project with Firestore enabled
 
 ### Installation
 
-1. Clone the repository
-2. Install dependencies:
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd the-draft-chamber
+   ```
+
+2. **Install dependencies**
 
    ```bash
    npm install
    ```
 
-3. Start the development server:
+3. **Configure Firebase**
+
+   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+   - Enable Firestore Database
+   - Update `src/firebase.js` with your Firebase configuration
+
+4. **Start the development server**
 
    ```bash
    npm start
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. **Open in browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-## Usage
+## 🎯 How It Works
 
-### Basic Implementation
+### 1. **Initial State**
 
-The app currently uses mock data for 10 participants. To integrate with your backend:
+- All participant cards are locked with unique passwords
+- Cards display participant names and locked status
+- Footer shows progress and instructions
 
-1. Replace the `mockParticipants` array in `App.jsx` with your API data
-2. Update the `handleCardClick` function to implement your business logic
-3. Add state management (Context API or Redux) for complex state
+### 2. **Password Entry**
 
-### Customization
+- Click a locked card to open the password modal
+- Enter the participant's unique password
+- Card unlocks and challenge modal opens
 
-#### Styling
+### 3. **Challenge Completion**
 
-- Global styles and CSS variables are in `src/index.css`
-- Component-specific styles use SCSS modules
-- Dark mode colors are defined in CSS custom properties
+- Complete 3 out of 3 available challenges in any order
+- Each challenge has specific success criteria
+- Unlimited attempts with encouraging feedback
 
-#### Adding New Features
+### 4. **Final Challenge**
 
-- Create new components in `src/components/ComponentName/`
-- Follow the established naming convention
-- Use SCSS modules for styling
-- Implement proper TypeScript types (when migrating)
+- "Hold to Cast" becomes available after completing all challenges
+- Hold button for 90 seconds continuously
+- Reveals participant's draft position upon completion
 
-## Card States
+### 5. **Draft Position Reveal**
 
-### Default State
+- Completed cards can be flipped to show draft position
+- Real-time updates show overall progress
+- Celebration animations for completion
 
-- Interactive card with hover effects
-- Shows participant name and ID
-- Click to flip the card
+## 🔧 Firebase Data Structure
 
-### Locked State
+```javascript
+// Firestore Collection: "participants"
+{
+  "participant-1": {
+    id: 1,
+    name: "Participant Name",
+    password: "unique-password",
+    draftPick: 3,
+    isLocked: true,
+    isCompleted: false,
+    unlockedAt: null,
+    completedAt: null
+  }
+}
+```
 
-- Grayed out appearance
-- Non-interactive (cursor: not-allowed)
-- Shows lock icon
-- Cannot be flipped
+## 🎨 Challenge Details
 
-### Flipped State
+### Click Frenzy ⚡
 
-- Shows card back with decorative pattern
-- 3D flip animation
-- Can be flipped back to front
+- **Objective**: Click 34 times in 5 seconds
+- **Difficulty**: Medium
+- **Tips**: Use rapid clicking or mobile tapping
 
-## Responsive Breakpoints
+### Reaction Time ⏱️
 
-- **Desktop (>1024px)**: 5x2 grid
-- **Tablet (768px-1024px)**: 4x3 grid
-- **Mobile (480px-768px)**: 3x4 grid
-- **Small Mobile (360px-480px)**: 2x5 grid
-- **Extra Small (<360px)**: 1x10 grid
+- **Objective**: Click when card lights up (under 250ms)
+- **Difficulty**: Easy
+- **Tips**: Stay focused and don't click too early
 
-## Development
+### Memory Match 🧠
 
-### Code Style
+- **Objective**: Match 5 pairs with only 3 strikes
+- **Difficulty**: Hard
+- **Tips**: Remember card positions carefully
 
-- Use functional components with hooks
-- Follow React best practices
-- Use SCSS modules for styling
-- Implement proper error boundaries
-- Add PropTypes or TypeScript for type safety
+### Hold to Cast 🎯
 
-### Testing
+- **Objective**: Hold button for 90 seconds continuously
+- **Difficulty**: Final Challenge
+- **Tips**: Don't let go or move your finger/mouse
 
-- Unit tests for components
-- Integration tests for user interactions
-- Accessibility testing
-- Cross-browser compatibility
+## 🎯 Customization
 
-### Future Enhancements
+### Adding New Challenges
 
-- Add React Context for state management
-- Implement drag-and-drop functionality
-- Add sound effects and animations
-- Create admin interface for managing participants
-- Add real-time updates with WebSockets
+1. Create component in `src/components/NewChallenge/`
+2. Add to `AVAILABLE_CHALLENGES` in `ChallengeModal.jsx`
+3. Update `challengeDescriptions` in `ChallengeSelection.jsx`
 
-## Contributing
+### Styling Customization
 
-1. Create a feature branch
-2. Make your changes
-3. Test thoroughly
-4. Submit a pull request
+- Global variables in `src/index.css`
+- Component-specific styles in respective `.module.scss` files
+- Dark mode variants using CSS custom properties
 
-## License
+### Firebase Configuration
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+- Update participant data structure in Firestore
+- Modify `participantService.js` for new fields
+- Adjust real-time listeners as needed
 
-## Browser Support
+## 🏗 Build and Deploy
 
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
+### Production Build
 
-## Performance
+```bash
+npm run build
+```
 
-- Optimized for 60fps animations
-- Lazy loading ready
-- Minimal bundle size
-- Efficient re-renders with React.memo (when needed)
+### Firebase Hosting (Optional)
+
+```bash
+npm install -g firebase-tools
+firebase login
+firebase init hosting
+firebase deploy
+```
+
+## 📱 Progressive Web App
+
+The app includes PWA features:
+
+- Service worker for offline functionality
+- Web app manifest for installation
+- Responsive design for all devices
+- Touch-optimized interactions
+
+## 🔍 Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm test -- --coverage
+
+# Run tests in watch mode
+npm test -- --watchAll
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Firebase Connection Issues**
+
+   - Check Firebase configuration in `src/firebase.js`
+   - Ensure Firestore is enabled in Firebase Console
+   - Verify network connectivity
+
+2. **Challenge Performance**
+
+   - Challenges are optimized for 60fps
+   - Use `requestAnimationFrame` for smooth animations
+   - Consider device performance limitations
+
+3. **Mobile Responsiveness**
+   - Test on various screen sizes
+   - Ensure touch targets are appropriate size
+   - Check landscape/portrait orientations
+
+## 🔮 Future Enhancements
+
+- **Admin Dashboard**: Manage participants and reset states
+- **Sound Effects**: Audio feedback for challenges and interactions
+- **Analytics**: Track completion rates and challenge performance
+- **Tournament Mode**: Multi-round draft support
+- **Custom Challenges**: User-defined challenge parameters
+- **Leaderboard**: Compare challenge completion times
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Firebase for real-time backend infrastructure
+- React team for the excellent framework
+- Create React App for streamlined development
+- CSS animations inspired by Pokémon Rayquaza
+
+---
+
+**Built with ❤️ for fantasy sports enthusiasts**
