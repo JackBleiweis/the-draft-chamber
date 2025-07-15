@@ -1,0 +1,83 @@
+// CardGrid Component Styles
+.gridContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+
+  // Ensure consistent card sizing
+  > * {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Responsive breakpoints
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 16px;
+
+    // Handle the extra cards for 4x3 grid (12 slots for 10 cards)
+    > :nth-child(9) {
+      grid-column: 2;
+      grid-row: 3;
+    }
+
+    > :nth-child(10) {
+      grid-column: 3;
+      grid-row: 3;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .gridContainer {
+    padding: 12px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+
+    // Handle the extra card for 3x4 grid (12 slots for 10 cards)
+    > :nth-child(10) {
+      grid-column: 2;
+      grid-row: 4;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .gridContainer {
+    padding: 8px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .gridContainer {
+    padding: 6px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(10, 1fr);
+    gap: 4px;
+  }
+}

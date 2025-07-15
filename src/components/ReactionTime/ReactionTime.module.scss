@@ -1,0 +1,653 @@
+// ReactionTime Component Styles
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 20px;
+  text-align: center;
+}
+
+.readyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 500px;
+
+  h3 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin: 0;
+
+    @media (prefers-color-scheme: dark) {
+      color: #ffffff;
+    }
+  }
+}
+
+.challengeIcon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #495057;
+  margin: 0;
+  line-height: 1.5;
+
+  @media (prefers-color-scheme: dark) {
+    color: #e2e8f0;
+  }
+}
+
+.rules {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: left;
+
+  p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+    color: #495057;
+
+    @media (prefers-color-scheme: dark) {
+      color: #e2e8f0;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+}
+
+.attemptsLeft {
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 600;
+  margin: 0;
+
+  @media (prefers-color-scheme: dark) {
+    color: #a0aec0;
+  }
+}
+
+.startButton {
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.gameState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.instructions {
+  text-align: center;
+}
+
+.message {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+
+  @media (prefers-color-scheme: dark) {
+    color: #ffffff;
+  }
+}
+
+.attemptsInfo {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin: 0;
+
+  @media (prefers-color-scheme: dark) {
+    color: #a0aec0;
+  }
+}
+
+.reactionCard {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  border: 4px solid #e9ecef;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  user-select: none;
+
+  @media (prefers-color-scheme: dark) {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+
+  &.waiting {
+    border-color: #ffc107;
+    background: #fff3cd;
+
+    @media (prefers-color-scheme: dark) {
+      background: #5a4f2d;
+      border-color: #f6e05e;
+    }
+  }
+
+  &.active {
+    border-color: #28a745;
+    background: #d4edda;
+    animation: pulse 0.5s ease infinite;
+
+    @media (prefers-color-scheme: dark) {
+      background: #2d5a3d;
+      border-color: #48bb78;
+    }
+  }
+
+  &.success {
+    border-color: #28a745;
+    background: #d4edda;
+
+    @media (prefers-color-scheme: dark) {
+      background: #2d5a3d;
+      border-color: #48bb78;
+    }
+  }
+
+  &.failed {
+    border-color: #dc3545;
+    background: #f8d7da;
+
+    @media (prefers-color-scheme: dark) {
+      background: #5a2d2d;
+      border-color: #f56565;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+  }
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #495057;
+
+  @media (prefers-color-scheme: dark) {
+    color: #e2e8f0;
+  }
+}
+
+.waitingIcon,
+.activeIcon {
+  font-size: 3rem;
+}
+
+.warning {
+  font-size: 1rem;
+  color: #dc3545;
+  font-weight: 600;
+  margin: 0;
+
+  @media (prefers-color-scheme: dark) {
+    color: #f56565;
+  }
+}
+
+.successState,
+.failedState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 400px;
+
+  h3 {
+    font-size: 1.75rem;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #495057;
+    margin: 0;
+
+    @media (prefers-color-scheme: dark) {
+      color: #e2e8f0;
+    }
+  }
+
+  strong {
+    color: var(--primary-color);
+    font-weight: 700;
+  }
+}
+
+.successState {
+  h3 {
+    color: #28a745;
+
+    @media (prefers-color-scheme: dark) {
+      color: #48bb78;
+    }
+  }
+}
+
+.failedState {
+  h3 {
+    color: #dc3545;
+
+    @media (prefers-color-scheme: dark) {
+      color: #f56565;
+    }
+  }
+}
+
+.successIcon,
+.failedIcon {
+  font-size: 3rem;
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.completingText {
+  font-size: 0.9rem;
+  color: #28a745;
+  font-weight: 600;
+
+  @media (prefers-color-scheme: dark) {
+    color: #48bb78;
+  }
+}
+
+.failMessage {
+  font-size: 1rem;
+  color: #dc3545;
+  font-weight: 600;
+
+  @media (prefers-color-scheme: dark) {
+    color: #f56565;
+  }
+}
+
+.failedActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.retryButton,
+.backButton {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+
+  &:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+}
+
+.retryButton {
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+  border: none;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+}
+
+.backButton {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  color: #6c757d;
+
+  &:hover {
+    background: #e9ecef;
+    color: #495057;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: #4a5568;
+    border-color: #4a5568;
+    color: #a0aec0;
+
+    &:hover {
+      background: #2d3748;
+      color: #ffffff;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+    min-height: 350px;
+  }
+
+  .reactionCard {
+    width: 200px;
+    height: 200px;
+  }
+
+  .cardContent {
+    font-size: 1rem;
+  }
+
+  .waitingIcon,
+  .activeIcon {
+    font-size: 2.5rem;
+  }
+
+  .message {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .failedActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .retryButton,
+  .backButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .reactionCard {
+    width: 180px;
+    height: 180px;
+  }
+
+  .rules {
+    padding: 12px;
+  }
+}
+
+// Penalty State Styles
+.penaltyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+.penaltyHeader {
+  margin-bottom: 30px;
+
+  h3 {
+    font-size: 1.8rem;
+    color: #dc3545;
+    margin: 16px 0 12px;
+    font-weight: 700;
+
+    @media (prefers-color-scheme: dark) {
+      color: #f56565;
+    }
+  }
+}
+
+.penaltyIcon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  animation: bounce 1s ease infinite;
+}
+
+.penaltyMessage {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.4;
+  max-width: 400px;
+
+  @media (prefers-color-scheme: dark) {
+    color: #a0aec0;
+  }
+}
+
+.monkeyContainer {
+  margin: 20px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  background: #f8f9fa;
+  padding: 20px;
+
+  @media (prefers-color-scheme: dark) {
+    background: #2d3748;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
+  }
+}
+
+.dancingMonkey {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid #667eea;
+  animation: monkeyPulse 2s ease-in-out infinite;
+
+  @media (prefers-color-scheme: dark) {
+    border-color: #81c784;
+  }
+}
+
+@keyframes monkeyPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.penaltyTimer {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.timerText {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #495057;
+  margin: 0 0 12px 0;
+
+  @media (prefers-color-scheme: dark) {
+    color: #e2e8f0;
+  }
+}
+
+.countdown {
+  color: #dc3545;
+  font-size: 1.4rem;
+  font-weight: 800;
+
+  @media (prefers-color-scheme: dark) {
+    color: #f56565;
+  }
+}
+
+.timerBar {
+  width: 100%;
+  height: 12px;
+  background: #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+
+  @media (prefers-color-scheme: dark) {
+    background: #4a5568;
+  }
+}
+
+.timerFill {
+  height: 100%;
+  background: linear-gradient(90deg, #dc3545, #28a745);
+  transition: width 1s linear;
+  border-radius: 6px;
+
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(90deg, #f56565, #48bb78);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+// Responsive adjustments for penalty screen
+@media (max-width: 768px) {
+  .penaltyState {
+    padding: 20px 16px;
+  }
+
+  .penaltyHeader h3 {
+    font-size: 1.5rem;
+  }
+
+  .penaltyMessage {
+    font-size: 1rem;
+  }
+
+  .dancingMonkey {
+    width: 160px;
+    height: 160px;
+  }
+
+  .timerText {
+    font-size: 1.1rem;
+  }
+
+  .countdown {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .penaltyState {
+    padding: 16px 12px;
+  }
+
+  .penaltyHeader h3 {
+    font-size: 1.3rem;
+  }
+
+  .penaltyMessage {
+    font-size: 0.95rem;
+  }
+
+  .dancingMonkey {
+    width: 140px;
+    height: 140px;
+  }
+
+  .monkeyContainer {
+    padding: 16px;
+  }
+
+  .timerText {
+    font-size: 1rem;
+  }
+
+  .countdown {
+    font-size: 1.2rem;
+  }
+}
