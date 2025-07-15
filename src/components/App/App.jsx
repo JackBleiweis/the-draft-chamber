@@ -39,6 +39,39 @@ const App = () => {
     return () => unsubscribe();
   }, []);
 
+  // Lock any unlocked but incomplete cards on page load
+  useEffect(() => {
+    const lockIncompleteCards = async () => {
+      if (participants.length > 0) {
+        // Find any participants that are unlocked but not completed
+        const incompleteUnlocked = participants.filter(p => !p.isLocked && !p.isCompleted);
+        
+        if (incompleteUnlocked.length > 0) {
+          console.log(`Locking ${incompleteUnlocked.length} incomplete cards on page load`);
+          
+          // Re-lock all incomplete cards
+          const lockPromises = incompleteUnlocked.map(participant => 
+            lockParticipant(participant.id).catch(error => 
+              console.error(`Failed to lock participant ${participant.id}:`, error)
+            )
+          );
+          
+          try {
+            await Promise.all(lockPromises);
+            console.log(`Successfully locked ${incompleteUnlocked.length} incomplete cards`);
+          } catch (error) {
+            console.error('Error locking incomplete cards on page load:', error);
+          }
+        }
+      }
+    };
+
+    // Only run once when participants are first loaded
+    if (!loading && participants.length > 0) {
+      lockIncompleteCards();
+    }
+  }, [loading, participants]);
+
   const handleCardClick = (participant, index) => {
     console.log(`Card clicked:`, participant);
     
