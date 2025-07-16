@@ -149,6 +149,7 @@
   justify-content: center;
   position: relative;
   user-select: none;
+  touch-action: manipulation;
 
   @media (prefers-color-scheme: dark) {
     background: #2d3748;

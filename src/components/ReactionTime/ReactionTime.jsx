@@ -14,7 +14,7 @@ const ReactionTime = ({ onComplete, onFailed, participantName }) => {
 
   const MAX_ATTEMPTS = 3;
   // const SUCCESS_THRESHOLD = 1350; // milliseconds
-  const SUCCESS_THRESHOLD = 250; // milliseconds
+  const SUCCESS_THRESHOLD = 350; // milliseconds - increased for mobile compatibility
   const PENALTY_DURATION = 15; // seconds
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const ReactionTime = ({ onComplete, onFailed, participantName }) => {
     timeoutRef.current = setTimeout(() => {
       setGameState('active');
       setMessage('CLICK NOW!');
-      startTimeRef.current = Date.now();
+      startTimeRef.current = performance.now();
     }, delay);
   };
 
@@ -50,9 +50,9 @@ const ReactionTime = ({ onComplete, onFailed, participantName }) => {
       clearTimeout(timeoutRef.current);
       setAttempts(prev => prev + 1);
     } else if (gameState === 'active') {
-      // Calculate reaction time
-      const endTime = Date.now();
-      const reaction = endTime - startTimeRef.current;
+      // Calculate reaction time using performance.now() for better precision
+      const endTime = performance.now();
+      const reaction = Math.round(endTime - startTimeRef.current);
       setReactionTime(reaction);
       
       if (reaction <= SUCCESS_THRESHOLD) {
@@ -148,6 +148,11 @@ const ReactionTime = ({ onComplete, onFailed, participantName }) => {
           <div 
             className={`${styles.reactionCard} ${getCardClass()}`}
             onClick={handleClick}
+            onTouchStart={(e) => {
+              e.preventDefault();
+              handleClick();
+            }}
+            style={{ touchAction: 'manipulation' }}
           >
             <div className={styles.cardContent}>
               {gameState === 'waiting' && (
